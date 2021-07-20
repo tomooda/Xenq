@@ -51,6 +51,11 @@ XenqXML >> addText: aString [
 ]
 
 { #category : #accessing }
+XenqXML >> append: aXenqXML [
+	^ children add: aXenqXML
+]
+
+{ #category : #accessing }
 XenqXML >> at: aString [
 	^ attributes at: aString
 ]
@@ -181,4 +186,9 @@ XenqXML >> quoteText: aString [
 { #category : #accessing }
 XenqXML >> removeAt: aString ifAbsent: errorBlock [
 	^ attributes removeKey: aString ifAbsent: errorBlock
+]
+
+{ #category : #accessing }
+XenqXML >> with: aBlock [
+	aBlock ifNotNil: [ aBlock value: self ]
 ]
