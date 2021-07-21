@@ -1,7 +1,7 @@
 Class {
 	#name : #XenqSVG,
 	#superclass : #XenqXML,
-	#category : #'Xenq-XML-Core'
+	#category : #'Xenq-Core'
 }
 
 { #category : #'instance creation' }

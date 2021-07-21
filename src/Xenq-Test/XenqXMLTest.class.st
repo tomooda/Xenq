@@ -1,7 +1,7 @@
 Class {
 	#name : #XenqXMLTest,
 	#superclass : #TestCase,
-	#category : #'Xenq-XML-Test'
+	#category : #'Xenq-Test'
 }
 
 { #category : #tests }

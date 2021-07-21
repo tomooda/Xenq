@@ -9,7 +9,7 @@ Class {
 	#classVars : [
 		'QuoteChars'
 	],
-	#category : #'Xenq-XML-Core'
+	#category : #'Xenq-Core'
 }
 
 { #category : #'instance creation' }
