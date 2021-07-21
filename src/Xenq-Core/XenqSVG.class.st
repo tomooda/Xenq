@@ -399,7 +399,9 @@ XenqSVG >> color: aStringOrColor [
 	^ aStringOrColor
 		ifNil: [ 'none' ]
 		ifNotNil: [ aStringOrColor isColor
-				ifTrue: [ '#' , aStringOrColor asHexString ]
+				ifTrue: [ aStringOrColor isTransparent
+						ifTrue: [ 'none' ]
+						ifFalse: [ '#' , aStringOrColor asHexString ] ]
 				ifFalse: [ aStringOrColor asString ] ]
 ]
 

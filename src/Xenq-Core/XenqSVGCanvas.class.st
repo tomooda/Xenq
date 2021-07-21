@@ -58,7 +58,7 @@ XenqSVGCanvas >> drawString: s from: firstIndex to: lastIndex in: boundsRect fon
 		fill: c
 		fontFamily: fontOrNil
 		fontSize: fontOrNil
-		with: [ :text | text at: 'alignment-baseline' put: 'top' ]
+		with: [ :text | text at: 'dominant-baseline' put: 'text-before-edge' ]
 ]
 
 { #category : #'drawing-text' }
@@ -74,7 +74,7 @@ XenqSVGCanvas >> drawString: s from: firstIndex to: lastIndex in: boundsRect fon
 		fill: c
 		fontFamily: fontOrNil
 		fontSize: fontOrNil
-		with: [ :text | text at: 'alignment-baseline' put: 'top' ]
+		with: [ :text | text at: 'dominant-baseline' put: 'text-before-edge' ]
 ]
 
 { #category : #accessing }
