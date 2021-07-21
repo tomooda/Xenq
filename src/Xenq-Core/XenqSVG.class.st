@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #'instance creation' }
+XenqSVG class >> extent: aPoint [
+	^ self
+		x: 0
+		y: 0
+		width: aPoint x
+		height: aPoint y
+		with: nil
+]
+
+{ #category : #'instance creation' }
 XenqSVG class >> with: aBlock [
 	^ (self name: 'svg')
 		at: 'version' put: '1.1';
@@ -407,7 +417,14 @@ XenqSVG >> fontFamily: aStringOrFont [
 
 { #category : #'attribute formatting' }
 XenqSVG >> fontSize: aStringOrNumber [
-	^ aStringOrNumber asString
+	^ [ aStringOrNumber pointSize asString ]
+		on: Error
+		do: [ :ex | aStringOrNumber asString ]
+]
+
+{ #category : #accessing }
+XenqSVG >> getCanvas [
+	^ XenqSVGCanvas on: self
 ]
 
 { #category : #'attribute formatting' }
