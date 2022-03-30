@@ -47,7 +47,7 @@ XenqXML >> addElement: aString with: aBlock [
 
 { #category : #accessing }
 XenqXML >> addText: aString [
-	^ children add: aString
+	^ children add: aString asString
 ]
 
 { #category : #accessing }
