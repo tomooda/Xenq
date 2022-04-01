@@ -13,6 +13,14 @@ Class {
 }
 
 { #category : #'instance creation' }
+XenqXML class >> addElement: aString with: aBlock [
+	| element |
+	element := self name: aString.
+	aBlock value: element.
+	^ element
+]
+
+{ #category : #'instance creation' }
 XenqXML class >> element: aString with: aBlock [
 	| element |
 	element := self name: aString.
