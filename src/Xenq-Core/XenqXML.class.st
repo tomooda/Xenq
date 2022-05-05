@@ -98,6 +98,12 @@ XenqXML >> childrenDo: aBlock [
 	children do: aBlock
 ]
 
+{ #category : #testing }
+XenqXML >> hasOnlyTextElement: aString [
+
+	^ children size = 1 and: [ children first = aString ]
+]
+
 { #category : #initialization }
 XenqXML >> initialize [
 	super initialize.
