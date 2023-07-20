@@ -55,7 +55,8 @@ XenqXML >> addElement: aString with: aBlock [
 
 { #category : #accessing }
 XenqXML >> addText: aString [
-	^ children add: aString asString
+
+	^ children add: (self quoteText: aString asString)
 ]
 
 { #category : #accessing }

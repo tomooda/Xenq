@@ -23,12 +23,12 @@ XenqXMLTest >> testAddText [
 	| xml |
 	xml := XenqXML
 		element: 'xml'
-		with: [ :element | element addText: 'test' ].
+		with: [ :element | element addText: 'test&debug' ].
 	self
 		assert:
 			(String
 				streamContents: [ :stream | xml childrenDo: [ :child | stream nextPutAll: child ] ])
-		equals: 'test'
+		equals: 'test&amp;debug'
 ]
 
 { #category : #tests }
