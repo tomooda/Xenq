@@ -25,17 +25,19 @@ XenqSVG class >> with: aBlock [
 
 { #category : #'instance creation' }
 XenqSVG class >> x: x y: y width: width height: height with: aBlock [
+
 	^ (self name: 'svg')
-		with: [ :svg | 
-			x ifNotNil: [ svg at: 'x' put: (svg coordinate: x) ].
-			y ifNotNil: [ svg at: 'y' put: (svg coordinate: y) ].
-			width ifNotNil: [ svg at: 'width' put: (svg length: width) ].
-			height ifNotNil: [ svg at: 'height' put: (svg length: height) ].
-			svg
-				at: 'version' put: '1.1';
-				at: 'xmlns' put: 'http://www.w3.org/2000/svg';
-				with: aBlock ];
-		yourself
+		  with: [ :svg |
+			  x ifNotNil: [ svg at: 'x' put: (svg coordinate: x) ].
+			  y ifNotNil: [ svg at: 'y' put: (svg coordinate: y) ].
+			  width ifNotNil: [ svg at: 'width' put: (svg length: width) ].
+			  height ifNotNil: [ svg at: 'height' put: (svg length: height) ].
+			  svg
+				  at: 'version' put: '1.1';
+				  at: 'xmlns' put: 'http://www.w3.org/2000/svg';
+				  at: 'xmlns:xlink' put: 'http://www.w3.org/1999/xlink';
+				  with: aBlock ];
+		  yourself
 ]
 
 { #category : #'instance creation' }
@@ -136,6 +138,41 @@ XenqSVG >> addG_fill: fill stroke: stroke strokeWidth: strokeWidth with: aBlock 
 			strokeWidth
 				ifNotNil: [ g at: 'stroke-width' put: (self length: strokeWidth) ].
 			aBlock ifNotNil: [ aBlock value: g ] ]
+]
+
+{ #category : #'instance creation' }
+XenqSVG >> addImage: aString x: x y: y width: width height: height with: aBlock [
+
+	^ self addElement: 'image' with: [ :image |
+		  x ifNotNil: [ image at: 'x' put: (image listOfCoordinates: x) ].
+		  y ifNotNil: [ image at: 'y' put: (image listOfCoordinates: y) ].
+		  width ifNotNil: [ image at: 'width' put: (image length: width) ].
+		  height ifNotNil: [ image at: 'height' put: (image length: height) ].
+		  image with: aBlock ]
+]
+
+{ #category : #'instance creation' }
+XenqSVG >> addImage_x: x y: y width: width height: height embedPNG: aForm with: aBlock [
+
+	^ self
+		  addImage_x: x
+		  y: y
+		  width: width
+		  height: height
+		  with: [ :image |
+			  image at: 'xlink:href' put: (image base64image: aForm).
+			  image with: aBlock ]
+]
+
+{ #category : #'instance creation' }
+XenqSVG >> addImage_x: x y: y width: width height: height with: aBlock [
+
+	^ self addElement: 'image' with: [ :image |
+		  x ifNotNil: [ image at: 'x' put: (image listOfCoordinates: x) ].
+		  y ifNotNil: [ image at: 'y' put: (image listOfCoordinates: y) ].
+		  width ifNotNil: [ image at: 'width' put: (image length: width) ].
+		  height ifNotNil: [ image at: 'height' put: (image length: height) ].
+		  image with: aBlock ]
 ]
 
 { #category : #'instance creation' }
@@ -392,6 +429,17 @@ XenqSVG >> addText: aString x: x y: y with: aBlock [
 		fontFamily: nil
 		fontSize: nil
 		with: aBlock
+]
+
+{ #category : #'attribute formatting' }
+XenqSVG >> base64image: aForm [
+
+	| png |
+	png := ByteArray streamContents: [ :stream |
+		       PNGReadWriter putForm: aForm onStream: stream ].
+	^ String streamContents: [ :stream |
+		  stream nextPutAll: 'data:image/png;base64,'.
+		  ZnBase64Encoder new encode: png readStream to: stream ]
 ]
 
 { #category : #'attribute formatting' }

@@ -110,7 +110,13 @@ XenqSVGCanvas >> frameAndFillRectangle: r fillColor: fillColor borderWidth: bord
 XenqSVGCanvas >> image: aForm at: aPoint sourceRect: sourceRect rule: rule [
 	"Note: The public use of this protocol is deprecated. It will become private. Nobody in the outside world must assume that a thing like a combination rule has any specific effect."
 
-	^ self shouldNotImplement
+	svg
+		addImage_x: aPoint x
+		y: aPoint y
+		width: aForm width
+		height: aForm height
+		embedPNG: aForm
+		with: nil
 ]
 
 { #category : #drawing }
